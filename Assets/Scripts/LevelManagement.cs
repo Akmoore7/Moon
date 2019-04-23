@@ -28,13 +28,16 @@ public class LevelManagement : MonoBehaviour
     public void ResetLevel() {
         Scene thisScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(thisScene.name);
+        GameManager.instance.isStopped = false;
     }
 
     public void NextLevel() {
         SceneManager.LoadScene("Level 1 Boss");
+        GameManager.instance.isStopped = false;
     }
 
     public void ExitMainMenu() {
         SceneManager.LoadScene("Main Menu");
+        GameManager.instance.isStopped = false;
     }
 }

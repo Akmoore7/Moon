@@ -34,6 +34,8 @@ public class UIController : MonoBehaviour {
     }
 
     public void GameOver() {
+        GameManager.instance.isStopped = true;
+        Time.timeScale = 0.0f;
         gameOverMenu.SetActive(true);
     }
 }

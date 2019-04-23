@@ -9,7 +9,9 @@ public class SoundManager : MonoBehaviour
     public float lowPitchRange = .95f;              //The lowest a sound effect will be randomly pitched.
     public float highPitchRange = 1.05f;            //The highest a sound effect will be randomly pitched.
 
+    private float fadeTime = 10.0f;
 
+    private bool musicPlaying;
     void Awake()
     {
         //Check if there is already an instance of SoundManager
@@ -42,6 +44,24 @@ public class SoundManager : MonoBehaviour
         Debug.Log("Clip Set");
         musicSource.Play();
         Debug.Log("Clip Played");
+    }
+    /// <summary>
+    /// Returns whether or not music is still playing, and slowly fades out music.
+    /// </summary>
+    /// <returns></returns>
+    public bool FadeOutMusic()
+    {
+        if (musicSource.volume > 0 && musicPlaying)
+        {
+            musicSource.volume = musicSource.volume - (Time.deltaTime / 100000000000000);
+            Debug.Log(musicSource.volume);
+        }
+        else if(musicPlaying)
+        {
+            musicSource.Stop();
+            musicPlaying = false;
+        }
+        return musicPlaying;
     }
 
 

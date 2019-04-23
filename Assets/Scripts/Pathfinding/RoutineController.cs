@@ -11,9 +11,12 @@ public class RoutineController : MonoBehaviour
 
     Routine routine;
 
+    bool aggroedOnce;
+
     void Start()
     {
         routine = Routine.Patrol;
+        aggroedOnce = false;
     }
 
     void Update()
@@ -49,8 +52,10 @@ public class RoutineController : MonoBehaviour
     public bool SetAggro()
     {
         if (routine == Routine.Aggro) return false;
+        Debug.Log("Hi");
+        GameManager.instance.AggroCounter(1, aggroedOnce);
+        aggroedOnce = true;
         routine = Routine.Aggro;
-        GameManager.instance.AggroCounter(1);
         return true;
     }
 

@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 670678040}
   - component: {fileID: 670678041}
-  - component: {fileID: 4689842884918584715}
-  m_Layer: 0
+  - component: {fileID: 4456534533237126494}
+  m_Layer: 2
   m_Name: Explosion Radius
   m_TagString: Ethereal
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ CircleCollider2D:
   m_Offset: {x: -0.0042806864, y: 0}
   serializedVersion: 2
   m_Radius: 1.5145346
---- !u!114 &4689842884918584715
+--- !u!114 &4456534533237126494
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e04e419817844deb67109d40b14dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 0
+  dmg: 2
 --- !u!1 &2991867501808357469
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2991867501808357447}
   - component: {fileID: 8074277045390238249}
   - component: {fileID: 7875609192288157058}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyDrone
   m_TagString: Killable
   m_Icon: {fileID: 0}

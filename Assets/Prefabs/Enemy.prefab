@@ -88,7 +88,7 @@ MonoBehaviour:
   maxSpeed: 3
   hp: {fileID: 6451590728446967259}
   corpse: {fileID: 6183641266302782330, guid: e322ecdc5b59ff54da8f9b1bb3cfd455, type: 3}
-  bullet: {fileID: 3286294735871222309, guid: 0cf6bbfc1cae1b3408a9bbd3d51c091e, type: 3}
+  bullet: {fileID: 3286294735871222309, guid: 5ecc7ced2eca6451d8fa73f72a5a29bf, type: 3}
   gunPivot: {fileID: 5006959189917746219}
   gun: {fileID: 2399524765462811178}
   playerGhost: {fileID: 1031372415}
@@ -209,6 +209,7 @@ MonoBehaviour:
   MaxHP: 5
   RemainingHP: 0
   rb2d: {fileID: 6451590728446967237}
+  uIController: {fileID: 0}
   alive: 1
 --- !u!61 &1300828084
 BoxCollider2D:

@@ -7,7 +7,6 @@ public class level_end : MonoBehaviour
 {
     public Rigidbody2D rb2d;
     public Rigidbody2D player;
-    public LevelManagement lm;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +26,7 @@ public class level_end : MonoBehaviour
         {
             if (Input.GetKeyDown("e"))
             {
-                lm.NextLevel();
+                GameManager.instance.GetComponent<LevelManagement>().NextLevel();
             }
         }
     }

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicManager: {fileID: 3286337813292664909}
   inCombat: 0
+  player: {fileID: 0}
+  CombatCounter: 0
 --- !u!114 &551388542842027332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +106,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CombatMusic:
   - {fileID: 8300000, guid: 2624339041f74ef4c8f7cd98542606b9, type: 3}
-  OutOfCombatMusic: []
-  DeathMusic: []
+  OutOfCombatMusic:
+  - {fileID: 8300000, guid: eb96293b0e5876346a6e1898a05be546, type: 3}
+  DeathMusic:
+  - {fileID: 8300000, guid: e376ec4dffbe3c449adacdd24c9e9581, type: 3}
   BossMusic: []
   current_music: 0
+  next_music: 0

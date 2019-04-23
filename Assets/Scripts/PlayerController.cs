@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
     public Sprite shotgun;
     public Sprite pistol;
+    public Animator pistolAnim, shotgunAnim;
+    public Animator GunAnimator;
     public SpriteRenderer spriteRenderer;
     public string[] guns = new string[2];
     public int currentGun = 0;
@@ -43,10 +45,13 @@ public class PlayerController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         dashLogic = GetComponent<DashAbility>();
         gunGameObject = gun.gameObject;
-        shotgun = Resources.Load<Sprite>("shotgun") as Sprite;
-        pistol = Resources.Load<Sprite>("Pistol") as Sprite;
-        guns[0] = "pistol";
-        guns[1] = "shotgun";
+        shotgun = Resources.Load<Sprite>("Shotgun1") as Sprite;
+        pistol = Resources.Load<Sprite>("Pistol1") as Sprite;
+        pistolAnim = Resources.Load<Animator>("PistolAnimator") as Animator;
+        shotgunAnim = Resources.Load<Animator>("ShotgunAnimator") as Animator;
+
+        guns[0] = "Pistol1";
+        guns[1] = "Shotgun1";
         spriteRenderer = gun.GetComponent<SpriteRenderer>();
 
     }
@@ -54,7 +59,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // rotate gun
-        if (hp.alive)
+        if (!GameManager.instance.isStopped)
         {
             Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mouseDelta = mouseWorld - gunPivot.position;
@@ -74,17 +79,19 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 switch(guns[currentGun]){
-                    case "pistol":
+                    case "Pistol1":
                         if(time > 15)
                         {
+                            gunGameObject.GetComponent<Animator>().SetTrigger("FirePistol");
                             GetComponent<PlayerSoundController>().FirePistol();
                             shootBullet(bullet, gun.position, gun.rotation);
                             time = 0;
                         }
                         break;
-                    case "shotgun":
+                    case "Shotgun1":
                         if(time > 70)
                         {
+                            gunGameObject.GetComponent<Animator>().SetTrigger("FireShotgun");
                             GetComponent<PlayerSoundController>().FireShotgun();
                             Quaternion bullet2Rotation = Quaternion.Euler(gun.rotation.eulerAngles.x, gun.rotation.eulerAngles.y, gun.rotation.eulerAngles.z - 5);
                             Quaternion bullet3Rotation = Quaternion.Euler(gun.rotation.eulerAngles.x, gun.rotation.eulerAngles.y, gun.rotation.eulerAngles.z - 10);
@@ -113,10 +120,12 @@ public class PlayerController : MonoBehaviour
 
                 currentGun = (currentGun + 1) % guns.Length; 
                 switch(guns[currentGun]){
-                    case "pistol":
+                    case "Pistol1":
+                        gunGameObject.GetComponent<Animator>().SetTrigger("ToPistol");
                         gunGameObject.GetComponent<SpriteRenderer>().sprite = pistol;
                         break;
-                    case "shotgun":
+                    case "Shotgun1":
+                        gunGameObject.GetComponent<Animator>().SetTrigger("ToShotgun");
                         gunGameObject.GetComponent<SpriteRenderer>().sprite = shotgun;
                         break;
                     default: 
@@ -140,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!dashLogic.dashing && hp.alive)
+        if (!dashLogic.dashing && !GameManager.instance.isStopped)
         {
             float hSpeed = Input.GetAxis("Horizontal");
             float vSpeed = Input.GetAxis("Vertical");
@@ -173,7 +182,7 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (hp.alive)
+        if (!GameManager.instance.isStopped)
         {
             Debug.Log("Collision detected");
             if (collision.tag == "Killable" && dashLogic.frame == DashAbility.Frames.Damage)

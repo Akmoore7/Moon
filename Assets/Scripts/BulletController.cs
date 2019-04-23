@@ -6,7 +6,9 @@ public class BulletController : MonoBehaviour
 {
     public float speed;
     public float dmg;
-    public float distance;
+    public float maxDistance;
+
+    private float distance;
 
     void Start()
     {
@@ -15,9 +17,21 @@ public class BulletController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime *2);
+        if (transform.parent.tag == "PlayerAttack")
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime * 3);
+        }else{
+            transform.Translate(Vector2.right * speed * Time.deltaTime * 2);
+
+        }
         distance += speed * Time.deltaTime * 2; 
-        if(distance >= 5 && transform.parent.name == "ShotgunBullet(Clone)"){
+        /*if(distance >= 4 && transform.parent.name == "ShotgunBullet(Clone)"){
+            Destroy(transform.parent.gameObject);
+        }else if(distance >= 6 && transform.parent.name == "PistolBullet(Clone)"){
+            Destroy(transform.parent.gameObject);
+        }*/
+        if(distance >= maxDistance)
+        {
             Destroy(transform.parent.gameObject);
         }
     }
@@ -31,6 +45,7 @@ public class BulletController : MonoBehaviour
                 collision.gameObject.GetComponent<Health>().takeDamage(dmg);
                 if(transform.parent.name == "PistolBullet(Clone)"){
                     collision.gameObject.GetComponent<EnemyController>().ReceiveStun();
+                    collision.gameObject.GetComponent<EnemyController>().KnockBack(transform.right);
                 }
             }
             Destroy(transform.parent.gameObject);
